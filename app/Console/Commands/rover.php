@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Classes\CommandRunner;
 use App\Classes\Commands;
 use App\Classes\Directions;
 use App\Classes\MoveForward;
@@ -56,30 +57,7 @@ class rover extends Command {
         $rover = new \App\Classes\Rover($initial_coordinates[0], $initial_coordinates[1], $initial_coordinates[2], $plateau);
 
         while ($commands = readline("Enter command to interact with rover: ")) {
-            $commands_list = [];
-            $length = strlen($commands);
-            for ($i = 0; $i < $length; $i++) {
-                $current_command = $commands[$i];
-
-                switch (strtoupper($current_command)) {
-                    case Commands::LEFT:
-                        $commands_list [] = new RotateLeft();
-                        break;
-                    case Commands::RIGHT:
-                        $commands_list [] = new RotateRight();
-                        break;
-                    case Commands::MoveForward:
-                        $commands_list [] = new MoveForward();
-                        break;
-                }
-            }
-
-            echo  app(Pipeline::class)
-                ->send($rover)
-                ->through($commands_list)
-                ->thenReturn()
-                ->getCordinates();
-
+            echo CommandRunner::exec($rover,$commands);
             echo "\n";
         }
 

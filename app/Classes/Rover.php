@@ -22,14 +22,14 @@ class Rover {
      */
     public $direction;
 
-    public function __construct(int $x, int $y, string $direction,Plateau $plateau) {
+    public function __construct(int $x, int $y, string $direction, Plateau $plateau) {
         $this->x = $x;
-        $this->y = $y;
+        $this->y = ($plateau->max_height - $y) + 1;
         $this->direction = $direction;
         $this->plateau = $plateau;
     }
 
-    public function getCordinates(){
+    public function getCordinates() {
         return "{$this->x} {$this->y} {$this->direction}";
     }
 }
