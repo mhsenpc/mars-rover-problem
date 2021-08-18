@@ -5,9 +5,9 @@ namespace App\Classes;
 
 abstract class Command {
     public function handle($request, \Closure $next) {
-        $builder = $next($request);
-        return $this->exec($builder);
+        $rover = $next($request);
+        return $this->execCommand($rover);
     }
 
-    public abstract function exec($builder);
+    protected abstract function execCommand($rover);
 }

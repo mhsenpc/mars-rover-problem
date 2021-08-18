@@ -4,8 +4,12 @@ namespace App\Console\Commands;
 
 use App\Classes\Commands;
 use App\Classes\Directions;
+use App\Classes\MoveForward;
 use App\Classes\Plateau;
+use App\Classes\RotateLeft;
+use App\Classes\RotateRight;
 use Illuminate\Console\Command;
+use Illuminate\Pipeline\Pipeline;
 
 class rover extends Command {
     /**
@@ -52,24 +56,30 @@ class rover extends Command {
         $rover = new \App\Classes\Rover($initial_coordinates[0], $initial_coordinates[1], $initial_coordinates[2], $plateau);
 
         while ($commands = readline("Enter command to interact with rover: ")) {
+            $commands_list = [];
             $length = strlen($commands);
             for ($i = 0; $i < $length; $i++) {
                 $current_command = $commands[$i];
 
                 switch (strtoupper($current_command)) {
                     case Commands::LEFT:
-                        $rover->rotateLeft();
+                        $commands_list [] = new RotateLeft();
                         break;
                     case Commands::RIGHT:
-                        $rover->rotateRight();
+                        $commands_list [] = new RotateRight();
                         break;
                     case Commands::MoveForward:
-                        $rover->moveForward();
+                        $commands_list [] = new MoveForward();
                         break;
                 }
             }
 
-            echo "{$rover->x} {$rover->y} {$rover->direction}";
+            echo  app(Pipeline::class)
+                ->send($rover)
+                ->through($commands_list)
+                ->thenReturn()
+                ->getCordinates();
+
             echo "\n";
         }
 
