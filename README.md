@@ -4,7 +4,7 @@
 * composer install
 * php artisan rover
 
-##Overview
+## Overview
 
 The purpose of this challenge is to enable you to demonstrate your proficiency in solving problems
 
