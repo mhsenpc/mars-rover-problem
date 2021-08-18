@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Classes\Commands;
+use App\Classes\Directions;
+use App\Classes\Plateau;
 use Illuminate\Console\Command;
 
 class rover extends Command {
@@ -28,35 +31,25 @@ class rover extends Command {
         parent::__construct();
     }
 
-    protected $x = 0;
-    protected $y = 0;
-    protected $max_width = 0;
-    protected $max_height = 0;
-    protected $direction = "N";
-
     /**
      * Execute the console command.
      *
      * @return int
      */
     public function handle() {
-        $platue_data = [];
-        while (count($platue_data) != 2) {
-            $platue = readline("Enter plateau data: ");
-            $platue_data = explode(" ", $platue);
+        $plateau_data = [];
+        while (count($plateau_data) != 2) {
+            $input = readline("Enter plateau data: ");
+            $plateau_data = explode(" ", $input);
         }
-        $this->max_width = $platue_data[0];
-        $this->max_height = $platue_data[1];
+        $plateau = new Plateau($plateau_data[0], $plateau_data[1]);
 
         $initial_coordinates = [];
-        while (count($initial_coordinates) != 3 || $initial_coordinates[0] > $this->max_width || $initial_coordinates[1] > $this->max_height) {
+        while (count($initial_coordinates) != 3 || $initial_coordinates[0] > $plateau->max_width || $initial_coordinates[1] > $plateau->max_height) {
             $position = readline("Enter rover initial position: ");
             $initial_coordinates = explode(" ", $position);
         }
-        $this->x = $initial_coordinates[0];
-        $this->y = $initial_coordinates[1];
-        $this->direction = $initial_coordinates[2];
-
+        $rover = new \App\Classes\Rover($initial_coordinates[0], $initial_coordinates[1], $initial_coordinates[2], $plateau);
 
         while ($commands = readline("Enter command to interact with rover: ")) {
             $length = strlen($commands);
@@ -64,90 +57,23 @@ class rover extends Command {
                 $current_command = $commands[$i];
 
                 switch (strtoupper($current_command)) {
-                    case "L":
-                        $this->rotateLeft();
+                    case Commands::LEFT:
+                        $rover->rotateLeft();
                         break;
-                    case "R":
-                        $this->rotateRight();
+                    case Commands::RIGHT:
+                        $rover->rotateRight();
                         break;
-                    case "M":
-                        $this->moveForward();
+                    case Commands::MoveForward:
+                        $rover->moveForward();
                         break;
                 }
-
-                if ($this->x < 0 || $this->x > $this->max_width || $this->y < 0 || $this->y > $this->max_height) {
-                    die("whoops. the rover can not move forward any further");
-                }
-
             }
 
-            echo "{$this->x} {$this->y} {$this->direction}";
+            echo "{$rover->x} {$rover->y} {$rover->direction}";
             echo "\n";
         }
 
         return 0;
     }
 
-    protected function rotateLeft() {
-        switch ($this->direction) {
-            case "N":
-                $this->direction = "W";
-                break;
-
-            case "S":
-                $this->direction = "E";
-                break;
-
-            case "E":
-                $this->direction = "N";
-                break;
-
-            case "W":
-                $this->direction = "S";
-                break;
-        }
-    }
-
-    protected function rotateRight() {
-        switch ($this->direction) {
-            case "N":
-                $this->direction = "E";
-                break;
-
-            case "S":
-                $this->direction = "W";
-                break;
-
-            case "E":
-                $this->direction = "S";
-                break;
-
-            case "W":
-                $this->direction = "N";
-                break;
-        }
-    }
-
-    protected function moveForward() {
-        switch ($this->direction) {
-            case "N":
-                if ($this->y + 1 <= $this->max_height)
-                    $this->y++;
-                break;
-            case "S":
-                if ($this->y - 1 >= 0)
-                    $this->y--;
-                break;
-            case "E":
-                if ($this->x + 1 <= $this->max_width)
-                    $this->x++;
-                break;
-            case "W":
-                if ($this->x - 1 >= 0)
-                    $this->x--;
-                break;
-            default:
-                break;
-        }
-    }
 }
