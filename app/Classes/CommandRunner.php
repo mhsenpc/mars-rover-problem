@@ -8,32 +8,27 @@ use App\Commands\MoveForward;
 use App\Commands\RotateLeft;
 use App\Commands\RotateRight;
 use App\Consts\Commands;
-use Illuminate\Pipeline\Pipeline;
+use App\Contracts\RoverInterface;
 
 class CommandRunner {
-    public static function exec($rover, string $commands) {
-        $commands_list = [];
+    public static function exec(RoverInterface $rover, string $commands) {
         $length = strlen($commands);
         for ($i = 0; $i < $length; $i++) {
             $current_command = $commands[$i];
 
             switch (strtoupper($current_command)) {
                 case Commands::LEFT:
-                    $commands_list [] = new RotateLeft();
+                    $rover->execCommand(new RotateLeft());
                     break;
                 case Commands::RIGHT:
-                    $commands_list [] = new RotateRight();
+                    $rover->execCommand(new RotateRight());
                     break;
                 case Commands::MoveForward:
-                    $commands_list [] = new MoveForward();
+                    $rover->execCommand(new MoveForward());
                     break;
             }
         }
 
-        return app(Pipeline::class)
-            ->send($rover)
-            ->through($commands_list)
-            ->thenReturn()
-            ->getCordinates();
+        return $rover->getCordinates();
     }
 }

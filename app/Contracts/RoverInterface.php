@@ -16,4 +16,6 @@ interface RoverInterface {
     public function setDirection(string $direction);
 
     public function getDirection(): string;
+
+    public function execCommand(CommandInterface $command);
 }

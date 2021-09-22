@@ -91,4 +91,8 @@ class Rover implements RoverInterface {
     public function getCordinates() {
         return "{$this->x} {$this->y} {$this->direction}";
     }
+
+    public function execCommand(CommandInterface $command){
+        $command->execCommand($this);
+    }
 }
