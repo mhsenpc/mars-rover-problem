@@ -1,27 +1,30 @@
 <?php
 
 
-namespace App\Classes;
+namespace App\Commands;
 
 
-class RotateLeft extends Command {
+use App\Classes\Command;
+use App\Consts\Directions;
+
+class RotateRight extends Command {
 
     protected function execCommand($rover) {
         switch ($rover->direction) {
             case Directions::NORTH:
-                $rover->direction = Directions::WEST;
-                break;
-
-            case Directions::SOUTH:
                 $rover->direction = Directions::EAST;
                 break;
 
+            case Directions::SOUTH:
+                $rover->direction = Directions::WEST;
+                break;
+
             case Directions::EAST:
-                $rover->direction = Directions::NORTH;
+                $rover->direction = Directions::SOUTH;
                 break;
 
             case Directions::WEST:
-                $rover->direction = Directions::SOUTH;
+                $rover->direction = Directions::NORTH;
                 break;
         }
         return $rover;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Classes;
+namespace App\Consts;
 
 
 class Commands {

@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Classes\CommandRunner;
-use App\Classes\Directions;
 use App\Classes\Plateau;
+use App\Consts\Directions;
 use PHPUnit\Framework\TestCase;
 
 class CommandsTest extends TestCase {

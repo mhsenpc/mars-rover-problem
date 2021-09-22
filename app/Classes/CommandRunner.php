@@ -4,6 +4,10 @@
 namespace App\Classes;
 
 
+use App\Commands\MoveForward;
+use App\Commands\RotateLeft;
+use App\Commands\RotateRight;
+use App\Consts\Commands;
 use Illuminate\Pipeline\Pipeline;
 
 class CommandRunner {

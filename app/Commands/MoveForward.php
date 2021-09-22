@@ -1,8 +1,11 @@
 <?php
 
 
-namespace App\Classes;
+namespace App\Commands;
 
+
+use App\Classes\Command;
+use App\Consts\Directions;
 
 class MoveForward extends Command {
 
