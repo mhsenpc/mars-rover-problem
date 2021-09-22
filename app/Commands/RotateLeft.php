@@ -10,21 +10,21 @@ use App\Consts\Directions;
 class RotateLeft extends Command {
 
     protected function execCommand($rover) {
-        switch ($rover->direction) {
+        switch ($rover->getDirection()) {
             case Directions::NORTH:
-                $rover->direction = Directions::WEST;
+                $rover->setDirection(Directions::WEST);
                 break;
 
             case Directions::SOUTH:
-                $rover->direction = Directions::EAST;
+                $rover->setDirection(  Directions::EAST);
                 break;
 
             case Directions::EAST:
-                $rover->direction = Directions::NORTH;
+                $rover->setDirection( Directions::NORTH);
                 break;
 
             case Directions::WEST:
-                $rover->direction = Directions::SOUTH;
+                $rover->setDirection( Directions::SOUTH);
                 break;
         }
         return $rover;

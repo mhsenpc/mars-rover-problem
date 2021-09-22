@@ -9,5 +9,5 @@ abstract class Command {
         return $this->execCommand($rover);
     }
 
-    protected abstract function execCommand($rover);
+    protected abstract function execCommand(Rover $rover);
 }

@@ -11,7 +11,7 @@ use App\Consts\Commands;
 use Illuminate\Pipeline\Pipeline;
 
 class CommandRunner {
-    public static function exec($rover,string $commands){
+    public static function exec($rover, string $commands) {
         $commands_list = [];
         $length = strlen($commands);
         for ($i = 0; $i < $length; $i++) {
@@ -30,7 +30,7 @@ class CommandRunner {
             }
         }
 
-        return  app(Pipeline::class)
+        return app(Pipeline::class)
             ->send($rover)
             ->through($commands_list)
             ->thenReturn()
