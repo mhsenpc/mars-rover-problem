@@ -4,7 +4,10 @@
 namespace App\Classes;
 
 
-class Rover {
+use App\Contracts\CommandInterface;
+use App\Contracts\RoverInterface;
+
+class Rover implements RoverInterface {
     /**
      * @var int
      */

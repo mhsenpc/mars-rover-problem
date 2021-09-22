@@ -6,10 +6,12 @@ namespace App\Commands;
 
 use App\Classes\Command;
 use App\Consts\Directions;
+use App\Contracts\CommandInterface;
+use App\Contracts\RoverInterface;
 
-class RotateRight extends Command {
+class RotateRight extends Command implements CommandInterface {
 
-    protected function execCommand($rover) {
+    public function execCommand(RoverInterface $rover): RoverInterface {
         switch ($rover->getDirection()) {
             case Directions::NORTH:
                 $rover->setDirection(Directions::EAST);
