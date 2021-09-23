@@ -18,13 +18,16 @@ class CommandRunner {
 
             switch (strtoupper($current_command)) {
                 case Commands::LEFT:
-                    $rover->execCommand(new RotateLeft());
+                    $command = new RotateLeft();
+                    $command->execCommand($rover);
                     break;
                 case Commands::RIGHT:
-                    $rover->execCommand(new RotateRight());
+                    $command = new RotateRight();
+                    $command->execCommand($rover);
                     break;
                 case Commands::MoveForward:
-                    $rover->execCommand(new MoveForward());
+                    $command = new MoveForward();
+                    $command->execCommand($rover);
                     break;
             }
         }

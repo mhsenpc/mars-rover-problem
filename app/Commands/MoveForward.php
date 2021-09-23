@@ -4,15 +4,13 @@
 namespace App\Commands;
 
 
-use App\Classes\Command;
-use App\Classes\Rover;
 use App\Consts\Directions;
 use App\Contracts\CommandInterface;
 use App\Contracts\RoverInterface;
 
-class MoveForward extends Command implements CommandInterface {
+class MoveForward implements CommandInterface {
 
-    public function execCommand(RoverInterface $rover): RoverInterface {
+    public function execCommand(RoverInterface $rover) {
         switch ($rover->getDirection()) {
             case Directions::NORTH:
                 if ($rover->getY() - 1 >= 0)
@@ -33,6 +31,5 @@ class MoveForward extends Command implements CommandInterface {
             default:
                 break;
         }
-        return $rover;
     }
 }
