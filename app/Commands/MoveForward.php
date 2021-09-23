@@ -13,19 +13,19 @@ class MoveForward implements CommandInterface {
     public function execCommand(RoverInterface $rover) {
         switch ($rover->getDirection()) {
             case Directions::NORTH:
-                if ($rover->getY() - 1 >= 0)
+                if ($rover->getY() > 0)
                     $rover->setY($rover->getY() - 1);
                 break;
             case Directions::SOUTH:
-                if ($rover->getY() + 1 <= $rover->getPlateau()->max_height)
+                if ($rover->getY() + 1 < $rover->getPlateau()->max_height)
                     $rover->setY($rover->getY() + 1);
                 break;
             case Directions::EAST:
-                if ($rover->getX() + 1 <= $rover->getPlateau()->max_width)
+                if ($rover->getX() + 1 < $rover->getPlateau()->max_width)
                     $rover->setX($rover->getX() + 1);
                 break;
             case Directions::WEST:
-                if ($rover->getX() - 1 >= 0)
+                if ($rover->getX()  > 0)
                     $rover->setX($rover->getX() - 1);
                 break;
             default:

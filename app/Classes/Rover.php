@@ -68,6 +68,7 @@ class Rover implements RoverInterface {
     public function setDirection(string $direction): void {
         $this->direction = $direction;
     }
+
     /**
      * @var int
      */
@@ -83,12 +84,12 @@ class Rover implements RoverInterface {
 
     public function __construct(int $x, int $y, string $direction, Plateau $plateau) {
         $this->x = $x;
-        $this->y = ($plateau->max_height - $y) + 1;
+        $this->y = $y;
         $this->direction = $direction;
         $this->plateau = $plateau;
     }
 
-    public function getCordinates() {
+    public function getCordinates(): string {
         return "{$this->x} {$this->y} {$this->direction}";
     }
 }

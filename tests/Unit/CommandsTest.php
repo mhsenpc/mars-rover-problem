@@ -18,7 +18,7 @@ class CommandsTest extends TestCase {
         $rover = new \App\Classes\Rover(1, 2, Directions::NORTH, $plateau);
 
         $this->assertEquals(
-            "1 3 N",
+            "1 1 N",
             CommandRunner::exec($rover, "LMLMLMLMM")
         );
     }
@@ -28,7 +28,7 @@ class CommandsTest extends TestCase {
         $rover = new \App\Classes\Rover(3, 3, Directions::EAST, $plateau);
 
         $this->assertEquals(
-            "5 1 E",
+            "4 4 E",
             CommandRunner::exec($rover, "MMRMMRMRRM")
         );
     }
