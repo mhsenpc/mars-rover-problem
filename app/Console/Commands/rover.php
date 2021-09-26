@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Classes\CommandRunner;
+use App\Classes\RoverOperator;
 use App\Classes\Plateau;
 use App\Factories\PlateauFactory;
 use App\Factories\RoverFactory;
@@ -61,7 +61,7 @@ class rover extends Command {
         }
 
         while ($commands = readline("Enter command to interact with rover: ")) {
-            echo CommandRunner::exec($rover, $commands);
+            echo RoverOperator::exec($rover, $commands);
             echo "\n";
         }
 

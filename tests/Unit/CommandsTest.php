@@ -2,10 +2,11 @@
 
 namespace Tests\Unit;
 
-use App\Classes\CommandRunner;
+use App\Classes\RoverOperator;
 use App\Classes\Coordinates;
 use App\Classes\Plateau;
 use App\Consts\Directions;
+use App\Factories\RoverFactory;
 use PHPUnit\Framework\TestCase;
 
 class CommandsTest extends TestCase {
@@ -22,7 +23,7 @@ class CommandsTest extends TestCase {
 
         $this->assertEquals(
             "1 1 N",
-            CommandRunner::exec($rover, "LMLMLMLMM")
+            RoverOperator::exec($rover, "LMLMLMLMM")
         );
     }
 
@@ -33,7 +34,7 @@ class CommandsTest extends TestCase {
 
         $this->assertEquals(
             "4 4 E",
-            CommandRunner::exec($rover, "MMRMMRMRRM")
+            RoverOperator::exec($rover, "MMRMMRMRRM")
         );
     }
 }

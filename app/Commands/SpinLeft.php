@@ -7,7 +7,7 @@ use App\Consts\Directions;
 use App\Contracts\CommandInterface;
 use App\Contracts\RoverInterface;
 
-class RotateLeft implements CommandInterface {
+class SpinLeft implements CommandInterface {
 
     public function execCommand(RoverInterface $rover) {
         switch ($rover->getDirection()) {

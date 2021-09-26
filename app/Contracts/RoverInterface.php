@@ -17,4 +17,10 @@ interface RoverInterface {
     public function setCoordinates(Coordinates $coordinates): void;
 
     public function getMyLocation(): string;
+
+    public function moveForward();
+
+    public function spinLeft();
+
+    public function spinRight();
 }

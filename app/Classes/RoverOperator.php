@@ -4,13 +4,10 @@
 namespace App\Classes;
 
 
-use App\Commands\MoveForward;
-use App\Commands\RotateLeft;
-use App\Commands\RotateRight;
 use App\Consts\Commands;
 use App\Contracts\RoverInterface;
 
-class CommandRunner {
+class RoverOperator {
     public static function exec(RoverInterface $rover, string $commands) {
         $length = strlen($commands);
         for ($i = 0; $i < $length; $i++) {
@@ -18,16 +15,13 @@ class CommandRunner {
 
             switch (strtoupper($current_command)) {
                 case Commands::LEFT:
-                    $command = new RotateLeft();
-                    $command->execCommand($rover);
+                    $rover->spinLeft();
                     break;
                 case Commands::RIGHT:
-                    $command = new RotateRight();
-                    $command->execCommand($rover);
+                    $rover->spinRight();
                     break;
                 case Commands::MoveForward:
-                    $command = new MoveForward();
-                    $command->execCommand($rover);
+                    $rover->moveForward();
                     break;
             }
         }

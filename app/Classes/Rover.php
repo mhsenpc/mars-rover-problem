@@ -4,6 +4,9 @@
 namespace App\Classes;
 
 
+use App\Commands\MoveForward;
+use App\Commands\SpinLeft;
+use App\Commands\SpinRight;
 use App\Contracts\CommandInterface;
 use App\Contracts\RoverInterface;
 
@@ -70,5 +73,20 @@ class Rover implements RoverInterface {
 
     public function getMyLocation(): string {
         return "{$this->getCoordinates()->getX()} {$this->getCoordinates()->getY()} {$this->getDirection()}";
+    }
+
+    public function moveForward(){
+        $command = new MoveForward();
+        $command->execCommand($this);
+    }
+
+    public function spinLeft(){
+        $command = new SpinLeft();
+        $command->execCommand($this);
+    }
+
+    public function spinRight(){
+        $command = new SpinRight();
+        $command->execCommand($this);
     }
 }
