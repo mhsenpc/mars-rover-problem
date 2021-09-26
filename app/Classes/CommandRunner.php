@@ -32,6 +32,6 @@ class CommandRunner {
             }
         }
 
-        return $rover->getCordinates();
+        return $rover->getMyLocation();
     }
 }

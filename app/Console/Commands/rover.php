@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Classes\CommandRunner;
 use App\Classes\Commands;
+use App\Classes\Cordinates;
 use App\Classes\Directions;
 use App\Classes\MoveForward;
 use App\Classes\Plateau;
@@ -50,14 +51,15 @@ class rover extends Command {
         $plateau = new Plateau($plateau_data[0], $plateau_data[1]);
 
         $initial_coordinates = [];
-        while (count($initial_coordinates) != 3 || $initial_coordinates[0] > $plateau->max_width || $initial_coordinates[1] > $plateau->max_height) {
+        while (count($initial_coordinates) != 3 || $initial_coordinates[0] > $plateau->getMaxWidth() || $initial_coordinates[1] > $plateau->getMaxHeight()) {
             $position = readline("Enter rover initial position: ");
             $initial_coordinates = explode(" ", $position);
         }
-        $rover = new \App\Classes\Rover($initial_coordinates[0], $initial_coordinates[1], $initial_coordinates[2], $plateau);
+        $cordinates = new Cordinates($initial_coordinates[0], $initial_coordinates[1]);
+        $rover = new \App\Classes\Rover($cordinates, $initial_coordinates[2], $plateau);
 
         while ($commands = readline("Enter command to interact with rover: ")) {
-            echo CommandRunner::exec($rover,$commands);
+            echo CommandRunner::exec($rover, $commands);
             echo "\n";
         }
 

@@ -8,37 +8,21 @@ use App\Contracts\CommandInterface;
 use App\Contracts\RoverInterface;
 
 class Rover implements RoverInterface {
-    /**
-     * @var int
-     */
-    private $x;
+
+    private $cordinates;
 
     /**
-     * @return int
+     * @return Cordinates
      */
-    public function getX(): int {
-        return $this->x;
+    public function getCordinates(): Cordinates {
+        return $this->cordinates;
     }
 
     /**
-     * @param int $x
+     * @param Cordinates $cordinates
      */
-    public function setX(int $x): void {
-        $this->x = $x;
-    }
-
-    /**
-     * @return int
-     */
-    public function getY(): int {
-        return $this->y;
-    }
-
-    /**
-     * @param int $y
-     */
-    public function setY(int $y): void {
-        $this->y = $y;
+    public function setCordinates(Cordinates $cordinates): void {
+        $this->cordinates = $cordinates;
     }
 
     /**
@@ -70,10 +54,6 @@ class Rover implements RoverInterface {
     }
 
     /**
-     * @var int
-     */
-    private $y;
-    /**
      * @var Plateau
      */
     private $plateau;
@@ -82,14 +62,13 @@ class Rover implements RoverInterface {
      */
     private $direction;
 
-    public function __construct(int $x, int $y, string $direction, Plateau $plateau) {
-        $this->x = $x;
-        $this->y = $y;
+    public function __construct(Cordinates $cordinates, string $direction, Plateau $plateau) {
+        $this->cordinates = $cordinates;
         $this->direction = $direction;
         $this->plateau = $plateau;
     }
 
-    public function getCordinates(): string {
-        return "{$this->x} {$this->y} {$this->direction}";
+    public function getMyLocation(): string {
+        return "{$this->getCordinates()->getX()} {$this->getCordinates()->getY()} {$this->getDirection()}";
     }
 }
