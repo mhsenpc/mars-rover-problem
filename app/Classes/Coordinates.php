@@ -4,12 +4,12 @@
 namespace App\Classes;
 
 
-class Cordinates {
+class Coordinates {
     private $x;
     private $y;
 
     /**
-     * Cordinates constructor.
+     * Coordinates constructor.
      * @param $x
      * @param $y
      */

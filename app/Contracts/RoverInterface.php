@@ -4,7 +4,7 @@
 namespace App\Contracts;
 
 
-use App\Classes\Cordinates;
+use App\Classes\Coordinates;
 
 interface RoverInterface {
 
@@ -12,9 +12,9 @@ interface RoverInterface {
 
     public function getDirection(): string;
 
-    public function getCordinates(): Cordinates;
+    public function getCoordinates(): Coordinates;
 
-    public function setCordinates(Cordinates $cordinates): void;
+    public function setCoordinates(Coordinates $coordinates): void;
 
     public function getMyLocation(): string;
 }

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Classes\CommandRunner;
-use App\Classes\Cordinates;
+use App\Classes\Coordinates;
 use App\Classes\Plateau;
 use App\Consts\Directions;
 use PHPUnit\Framework\TestCase;
@@ -16,9 +16,9 @@ class CommandsTest extends TestCase {
      */
     public function test_LMLMLMLMM() {
         $plateau = new Plateau(5, 5);
-        $cordinates = new Cordinates(1,2);
+        $coordinates = new Coordinates(1,2);
 
-        $rover = new \App\Classes\Rover($cordinates, Directions::NORTH, $plateau);
+        $rover = new \App\Classes\Rover($coordinates, Directions::NORTH, $plateau);
 
         $this->assertEquals(
             "1 1 N",
@@ -28,8 +28,8 @@ class CommandsTest extends TestCase {
 
     public function test_MMRMMRMRRM() {
         $plateau = new Plateau(5, 5);
-        $cordinates = new Cordinates(3,3);
-        $rover = new \App\Classes\Rover($cordinates, Directions::EAST, $plateau);
+        $coordinates = new Coordinates(3,3);
+        $rover = new \App\Classes\Rover($coordinates, Directions::EAST, $plateau);
 
         $this->assertEquals(
             "4 4 E",

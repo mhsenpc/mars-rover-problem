@@ -9,20 +9,20 @@ use App\Contracts\RoverInterface;
 
 class Rover implements RoverInterface {
 
-    private $cordinates;
+    private $coordinates;
 
     /**
-     * @return Cordinates
+     * @return Coordinates
      */
-    public function getCordinates(): Cordinates {
-        return $this->cordinates;
+    public function getCoordinates(): Coordinates {
+        return $this->coordinates;
     }
 
     /**
-     * @param Cordinates $cordinates
+     * @param Coordinates $coordinates
      */
-    public function setCordinates(Cordinates $cordinates): void {
-        $this->cordinates = $cordinates;
+    public function setCoordinates(Coordinates $coordinates): void {
+        $this->coordinates = $coordinates;
     }
 
     /**
@@ -62,13 +62,13 @@ class Rover implements RoverInterface {
      */
     private $direction;
 
-    public function __construct(Cordinates $cordinates, string $direction, Plateau $plateau) {
-        $this->cordinates = $cordinates;
+    public function __construct(Coordinates $coordinates, string $direction, Plateau $plateau) {
+        $this->coordinates = $coordinates;
         $this->direction = $direction;
         $this->plateau = $plateau;
     }
 
     public function getMyLocation(): string {
-        return "{$this->getCordinates()->getX()} {$this->getCordinates()->getY()} {$this->getDirection()}";
+        return "{$this->getCoordinates()->getX()} {$this->getCoordinates()->getY()} {$this->getDirection()}";
     }
 }
